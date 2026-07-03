@@ -17,6 +17,32 @@
     { slug: 'contact', label: 'お問い合わせ', key: 'contact' }
   ];
   const pageHref = (slug) => '../' + slug + '/index.html';
+  const prefetched = new Set();
+  const prefetchPage = (href) => {
+    if (!href || prefetched.has(href)) return;
+    let url;
+    try {
+      url = new URL(href, location.href);
+    } catch {
+      return;
+    }
+    if (url.origin !== location.origin || url.pathname === location.pathname) return;
+    prefetched.add(href);
+    const link = document.createElement('link');
+    link.rel = 'prefetch';
+    link.href = url.href;
+    link.as = 'document';
+    document.head.appendChild(link);
+  };
+  const schedulePrefetch = () => {
+    const run = () => {
+      document.querySelectorAll('a[href$="/index.html"]').forEach((link) => {
+        prefetchPage(link.getAttribute('href'));
+      });
+    };
+    if ('requestIdleCallback' in window) window.requestIdleCallback(run, { timeout: 2500 });
+    else window.setTimeout(run, 900);
+  };
   const mount = document.querySelector('[data-site-header]');
   const active = mount?.dataset.active || '';
   const navLinks = navItems.map((item) => '<a href="' + pageHref(item.slug) + '" class="' + (active === item.key ? 'active' : '') + '">' + item.label + '</a>').join('');
@@ -44,4 +70,18 @@
     });
     document.addEventListener('keydown', (event) => { if (event.key === 'Escape') close(); });
   }
+  document.addEventListener('mouseover', (event) => {
+    const link = event.target.closest?.('a[href$="/index.html"]');
+    if (link) prefetchPage(link.getAttribute('href'));
+  }, { passive: true });
+  document.addEventListener('focusin', (event) => {
+    const link = event.target.closest?.('a[href$="/index.html"]');
+    if (link) prefetchPage(link.getAttribute('href'));
+  });
+  document.addEventListener('pointerdown', (event) => {
+    const link = event.target.closest?.('a[href$="/index.html"]');
+    if (link) prefetchPage(link.getAttribute('href'));
+  }, { passive: true });
+  if (document.readyState === 'complete') schedulePrefetch();
+  else window.addEventListener('load', schedulePrefetch, { once: true });
 })();
