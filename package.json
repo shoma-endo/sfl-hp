@@ -1,8 +1,8 @@
 {
-  "name": "hp-template-site",
+  "name": "sfl-hp",
   "private": true,
   "config": {
-    "cloudflare_project_name": "hp-template-site"
+    "cloudflare_project_name": "sfl-hp"
   },
   "scripts": {
     "dev": "wrangler pages dev public",

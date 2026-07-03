@@ -1,32 +1,21 @@
 # Cloudflare Pages デプロイメモ
 
-このプロジェクトは、Cloudflare Pages に静的サイトとしてデプロイします。
-
-## Cloudflare Pages 設定
-
+- Cloudflare Pages project name: `sfl-hp`
 - Framework preset: `None`
-- Build command: 空欄
+- Build command: 空
 - Build output directory: `public`
-- Cloudflare Pages project name: `hp-template-site`
-- Wrangler config: `wrangler.jsonc`
 
-## コマンド
+## 環境変数
+
+Cloudflare PagesのSettings > Environment variablesに以下を設定します。
+
+- `RESEND_API_KEY`: メール送信用のResend APIキー。
+- `CONTACT_FROM_EMAIL`: 送信元メールアドレス。
+- `CONTACT_TO_EMAIL`: `salonflowlab2603@gmail.com`。
+- `LARK_CONTACT_WEBHOOK_URL`: Larkチャット通知用webhook URL。URL確定後に追加。
+
+CLIでデプロイする場合:
 
 ```bash
-npm install
-npm run dev
 npm run deploy
 ```
-
-`npm run dev` は Cloudflare Pages のローカルプレビューを起動します。`npm run deploy` は `package.json` の `config.cloudflare_project_name` に設定されたプロジェクトへ `public/` をアップロードします。
-
-新しいサイトで使う場合は、初回デプロイ前に `package.json` の `config.cloudflare_project_name` と `wrangler.jsonc` の `name` を同じプロジェクト名に変更してください。
-
-## 参考リンク
-
-- https://developers.cloudflare.com/pages/
-- https://developers.cloudflare.com/pages/get-started/
-- https://developers.cloudflare.com/pages/functions/wrangler-configuration/
-- https://developers.cloudflare.com/pages/configuration/headers/
-- https://developers.cloudflare.com/pages/configuration/redirects/
-- https://developers.cloudflare.com/workers/wrangler/
