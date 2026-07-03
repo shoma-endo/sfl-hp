@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>/pages/01-top/</loc></url>
-  <url><loc>/pages/02-salon/</loc></url>
-  <url><loc>/pages/08-management-system/</loc></url>
-  <url><loc>/pages/06-school/</loc></url>
-  <url><loc>/pages/04-reservation/</loc></url>
-  <url><loc>/pages/03-menu-price/</loc></url>
-  <url><loc>/pages/10-access/</loc></url>
-  <url><loc>/pages/13-ai-tools/</loc></url>
-  <url><loc>/pages/11-contact/</loc></url>
-  <url><loc>/pages/14-download/</loc></url>
-  <url><loc>/pages/09-consulting/</loc></url>
-  <url><loc>/pages/12-privacy-policy/</loc></url>
+  <url><loc>https://salonflowlab.com/pages/home/</loc></url>
+  <url><loc>https://salonflowlab.com/pages/services/</loc></url>
+  <url><loc>https://salonflowlab.com/pages/cycle-pro/</loc></url>
+  <url><loc>https://salonflowlab.com/pages/features/</loc></url>
+  <url><loc>https://salonflowlab.com/pages/flow/</loc></url>
+  <url><loc>https://salonflowlab.com/pages/pricing/</loc></url>
+  <url><loc>https://salonflowlab.com/pages/case-study/</loc></url>
+  <url><loc>https://salonflowlab.com/pages/knowledge/</loc></url>
+  <url><loc>https://salonflowlab.com/pages/company/</loc></url>
+  <url><loc>https://salonflowlab.com/pages/download/</loc></url>
+  <url><loc>https://salonflowlab.com/pages/faq/</loc></url>
+  <url><loc>https://salonflowlab.com/pages/contact/</loc></url>
 </urlset>

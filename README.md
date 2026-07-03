@@ -4,7 +4,7 @@
 
 ## 構成
 
-- `public/index.html`: ルート入口ページ。`/pages/01-top/` へリダイレクトします。
+- `public/index.html`: ルート入口ページ。`/pages/home/` へリダイレクトします。
 - `public/pages/`: 各ページのHTML。
 - `public/assets/css/sfl.css`: SFL用の共通スタイル。
 - `public/assets/js/site-chrome.js`: 共通ヘッダー、ドロワー、フッター生成。
@@ -25,6 +25,7 @@
 - 会社概要
 - よくある質問
 - お問い合わせ
+- 資料請求
 
 ## コマンド
 

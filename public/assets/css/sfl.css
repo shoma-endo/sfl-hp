@@ -94,6 +94,19 @@ body,.sfl-page{background:#F8F5EF}
 
 .sfl-float.notice{right:3%;top:18%;color:var(--sfl-navy)}
 
+.sfl-section.compact{padding:38px 0 78px}
+.sfl-benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.sfl-benefit-grid article{position:relative;padding:26px 28px;background:rgba(255,255,255,.78);border:1px solid rgba(201,154,26,.24);border-radius:6px;box-shadow:var(--sfl-shadow)}
+.sfl-benefit-grid span{display:block;font-family:"Cinzel",Georgia,serif;color:var(--sfl-gold);font-size:13px;letter-spacing:.18em;font-weight:700}
+.sfl-benefit-grid h2{margin:8px 0 10px;color:var(--sfl-navy);font-size:22px;font-family:"Noto Serif JP",serif;letter-spacing:.04em}
+.sfl-benefit-grid p{color:var(--sfl-muted);font-weight:800}
+.sfl-before-after{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.sfl-case > .sfl-before-after,.sfl-case > .sfl-case-panel:last-child{grid-column:1/-1}
+.sfl-before-after div{padding:18px 20px;background:rgba(255,255,255,.78);border:1px solid rgba(201,154,26,.22);border-radius:6px}
+.sfl-before-after b{display:block;margin-bottom:8px;color:var(--sfl-gold);font-family:"Cinzel",Georgia,serif;letter-spacing:.12em}
+.sfl-before-after p{color:var(--sfl-muted);font-weight:800}
+@media(max-width:900px){.sfl-benefit-grid,.sfl-before-after{grid-template-columns:1fr}.sfl-section.compact{padding:28px 0 56px}}
+
 
 /* Download page */
 .sfl-download-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:stretch}
