@@ -6,9 +6,8 @@
     { slug: 'case-study', label: '導入事例', key: 'case' },
     { slug: 'company', label: '会社概要', key: 'company' }
   ];
-  const salonProductItems = [
-    { slug: 'pricing', label: '料金プラン', key: 'pricing' },
-    { slug: 'cycle-pro', label: 'Cycle Proとは', key: 'cycle' }
+  const relatedProductItems = [
+    { slug: 'cycle-pro', label: 'Cycle Pro', key: 'cycle' }
   ];
   const contactItems = [
     { slug: 'download', label: '資料請求', key: 'download' },
@@ -19,23 +18,31 @@
     label: service.label,
     key: service.slug
   }));
+  const siteFooterItems = [
+    ...navItems,
+    { slug: 'pricing', label: 'よくある質問', key: 'faq', hash: '#faq' }
+  ];
   const footerServiceItems = [
     ...serviceNavItems,
-    ...salonProductItems
+    ...relatedProductItems
   ];
   const footerGroups = [
-    { title: 'サイト', items: navItems },
+    { title: 'サイト', items: siteFooterItems },
     { title: 'サービス', items: footerServiceItems },
     { title: 'お問い合わせ', items: contactItems }
   ];
   const drawerItems = [
     ...navItems,
     ...serviceNavItems,
-    ...salonProductItems,
+    ...relatedProductItems,
     { slug: 'contact', label: 'お問い合わせ', key: 'contact' }
   ];
-  const pageHref = (slug) => '../' + slug + '/index.html';
-  const linkList = (items) => items.map((item) => '<a href="' + pageHref(item.slug) + '">' + item.label + '</a>').join('');
+  const pageHref = (item) => {
+    const slug = typeof item === 'string' ? item : item.slug;
+    const hash = typeof item === 'object' && item.hash ? item.hash : '';
+    return '../' + slug + '/index.html' + hash;
+  };
+  const linkList = (items) => items.map((item) => '<a href="' + pageHref(item) + '">' + item.label + '</a>').join('');
   const prefetched = new Set();
   const prefetchPage = (href) => {
     if (!href || prefetched.has(href)) return;
@@ -67,14 +74,14 @@
   const serviceSlugs = servicesCatalog.map((service) => service.slug);
   const navLinks = navItems.map((item) => {
     const isActive = active === item.key || (item.key === 'services' && serviceSlugs.includes(active));
-    return '<a href="' + pageHref(item.slug) + '" class="' + (isActive ? 'active' : '') + '">' + item.label + '</a>';
+    return '<a href="' + pageHref(item) + '" class="' + (isActive ? 'active' : '') + '">' + item.label + '</a>';
   }).join('');
   if (mount) {
     mount.outerHTML = '<header class="sfl-header"><div class="sfl-nav-wrap"><a class="sfl-brand" href="' + pageHref('home') + '" aria-label="合同会社SFL SALON FLOW LAB."><img class="sfl-logo" src="../../assets/images/sfl-logo-primary.png" alt="合同会社SFL SALON FLOW LAB."></a><nav class="sfl-nav">' + navLinks + '</nav><div class="sfl-header-actions"><a class="sfl-btn sfl-btn-gold" href="' + pageHref('contact') + '">お問い合わせ</a><a class="sfl-btn sfl-btn-outline" href="' + pageHref('download') + '">資料請求</a></div><button class="sfl-menu" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="sfl-drawer" data-open-drawer><span></span><span></span><span></span></button></div></header>';
   }
   const drawerMount = document.querySelector('[data-site-drawer]');
   if (drawerMount) {
-    const drawerLinks = drawerItems.map((item) => '<a href="' + pageHref(item.slug) + '">' + item.label + '</a>').join('');
+    const drawerLinks = drawerItems.map((item) => '<a href="' + pageHref(item) + '">' + item.label + '</a>').join('');
     drawerMount.outerHTML = '<div class="sfl-drawer" id="sfl-drawer" data-drawer role="dialog" aria-modal="true" aria-label="サイトメニュー" aria-hidden="true"><div class="sfl-drawer-panel"><button class="sfl-drawer-close" type="button" aria-label="閉じる" data-close-drawer>×</button>' + drawerLinks + '<a class="sfl-btn sfl-btn-gold" href="' + pageHref('contact') + '">お問い合わせ</a><a class="sfl-btn sfl-btn-outline" href="' + pageHref('download') + '">資料請求</a></div></div>';
   }
   const footerMount = document.querySelector('[data-site-footer]');
