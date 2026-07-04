@@ -446,8 +446,16 @@ html.sfl-motion-ready .sfl-section-head[data-sfl-line-left].sfl-is-visible::afte
 .sfl-price-group-head .sfl-en{display:block;font-family:var(--sfl-font-en,"Cinzel",serif);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--sfl-gold);margin-bottom:8px}
 .sfl-price-group-head h2{font-size:28px;color:var(--sfl-navy);margin:0 0 10px}
 .sfl-price-group-head p{color:var(--sfl-muted);font-weight:700;margin:0;max-width:720px}
-.sfl-price-grid-single{grid-template-columns:minmax(280px,480px)!important}
+.sfl-price-grid-single{grid-template-columns:minmax(280px,480px)!important;justify-content:center}
 .sfl-price-grid-single .sfl-price{max-width:480px}
+.sfl-price-grid-triple{grid-template-columns:repeat(3,minmax(260px,340px))!important;justify-content:center;gap:24px;width:100%;max-width:1120px;margin-inline:auto}
+@media(max-width:1100px){.sfl-price-grid-triple{grid-template-columns:repeat(2,minmax(260px,340px))!important;max-width:720px}}
+@media(max-width:720px){.sfl-price-grid-triple{grid-template-columns:minmax(0,480px)!important;max-width:480px}}
+
+/* 3-column centered grids — cards, benefits (matches price cards) */
+.sfl-card-grid-triple,.sfl-grid-triple{grid-template-columns:repeat(3,minmax(260px,340px))!important;justify-content:center;gap:24px;width:100%;max-width:1120px;margin-inline:auto}
+@media(max-width:1100px){.sfl-card-grid-triple,.sfl-grid-triple{grid-template-columns:repeat(2,minmax(260px,340px))!important;max-width:720px}}
+@media(max-width:720px){.sfl-card-grid-triple,.sfl-grid-triple{grid-template-columns:minmax(0,480px)!important;max-width:480px}}
 
 /* Footer — grouped navigation */
 .sfl-footer-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px 40px}
@@ -464,6 +472,8 @@ html.sfl-motion-ready .sfl-section-head[data-sfl-line-left].sfl-is-visible::afte
 
 /* Pricing page — anchors & FAQ accordion */
 #flow,#faq{scroll-margin-top:calc(var(--sfl-header-height) + 24px)}
+.sfl-page-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+@media(max-width:720px){.sfl-page-actions{display:grid;grid-template-columns:1fr}.sfl-page-actions .sfl-btn{width:100%}}
 .sfl-faq-accordion{display:flex;flex-direction:column;gap:12px}
 .sfl-faq-accordion .sfl-faq-item{padding:0;border:1px solid rgba(201,154,26,.22);border-radius:6px;background:rgba(255,255,255,.92);box-shadow:var(--sfl-shadow);overflow:hidden}
 .sfl-faq-accordion .sfl-faq-item summary{display:flex;align-items:center;min-height:56px;padding:16px 20px;font-size:18px;font-weight:800;color:var(--sfl-navy);cursor:pointer;list-style:none}
