@@ -455,3 +455,9 @@ html.sfl-motion-ready .sfl-section-head[data-sfl-line-left].sfl-is-visible::afte
 .sfl-footer-nav{display:flex;flex-direction:column;gap:0}
 .sfl-footer-nav a{min-height:40px;padding:6px 0}
 @media(max-width:720px){.sfl-footer-links{grid-template-columns:1fr;gap:28px}}
+
+/* Notice banner — 準備中ページ等 */
+.sfl-notice-banner{padding:28px 32px;border:1px solid rgba(201,154,26,.35);border-radius:8px;background:rgba(255,248,232,.92);box-shadow:0 12px 36px rgba(6,22,56,.06)}
+.sfl-notice-banner strong{display:block;font-size:20px;color:var(--sfl-navy);margin-bottom:8px}
+.sfl-notice-banner p{margin:0;color:var(--sfl-muted);font-weight:700;line-height:1.7}
+.sfl-notice-banner a{color:var(--sfl-gold);font-weight:800}

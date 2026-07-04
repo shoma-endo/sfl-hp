@@ -1,9 +1,8 @@
 (() => {
   const navItems = [
     { slug: 'home', label: 'ホーム', key: 'home' },
-    { slug: 'services', label: 'サービス', key: 'services' },
+    { slug: 'services', label: 'SALON FLOW ONE', key: 'services' },
     { slug: 'case-study', label: '導入事例', key: 'case' },
-    { slug: 'knowledge', label: 'コラム', key: 'knowledge' },
     { slug: 'company', label: '会社概要', key: 'company' }
   ];
   const productItems = [

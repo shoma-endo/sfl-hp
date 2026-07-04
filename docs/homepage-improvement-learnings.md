@@ -253,3 +253,4 @@ public/pages/contact/index.html   … フォームページの参照実装
 | 2026-07-04 | 料金カード・ホーム事例の CTA 整理、fixed ヘッダー、チェックリスト追記を反映 |
 | 2026-07-04 | SALON FLOW ONE を表向け中核サービスとして全ページ表記を統一 |
 | 2026-07-04 | フッターを3グループ化。「機能」ページを Cycle Pro へ統合 |
+| 2026-07-04 | services を SALON FLOW ONE 商品ページ化、Lark 統合、コラムをナビ非公開 |

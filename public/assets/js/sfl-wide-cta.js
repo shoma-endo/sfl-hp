@@ -40,9 +40,9 @@
     },
     'home-services': {
       title: 'ツールの導入だけでなく、定着と運用改善まで伴走します。',
-      description: 'サロンの規模や課題に合わせて、最適な支援内容をご提案します。',
+      description: '3本柱の詳細、月額プラン、導入の流れをご案内します。',
       actions: [
-        { label: 'サービスを見る', href: '../services/index.html', className: 'sfl-btn sfl-btn-gold' },
+        { label: 'SALON FLOW ONEの詳細', href: '../services/index.html', className: 'sfl-btn sfl-btn-gold' },
         { label: '導入事例を見る', href: '../case-study/index.html', className: 'sfl-btn sfl-btn-outline' }
       ]
     }
