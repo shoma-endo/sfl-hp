@@ -80,7 +80,6 @@
     var error = getFieldError(field);
     field.setAttribute('aria-invalid', message ? 'true' : 'false');
     error.textContent = message;
-    error.hidden = !message;
   }
 
   function validateFieldInline(field, showEmpty) {

@@ -121,13 +121,14 @@ body,.sfl-page{background:#F8F5EF}
 .sfl-form{display:grid;gap:18px;padding:34px;background:rgba(255,255,255,.78);border:1px solid rgba(201,154,26,.24);border-radius:6px;box-shadow:var(--sfl-shadow)}
 .sfl-form.compact{padding:0;background:transparent;border:0;box-shadow:none;margin-top:6px}
 .sfl-form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.sfl-form label{display:grid;gap:8px;color:var(--sfl-navy);font-weight:900;font-size:14px}
-.sfl-form label span{color:var(--sfl-gold);font-size:12px;margin-left:4px}
+.sfl-form label{display:grid;gap:8px;color:var(--sfl-navy);font-weight:900;font-size:14px;line-height:1.5}
+.sfl-form label span{color:var(--sfl-gold);font-size:12px;margin-left:2px;vertical-align:baseline}
 .sfl-form input,.sfl-form select,.sfl-form textarea{width:100%;border:1px solid rgba(16,58,113,.22);border-radius:4px;background:#fff;color:var(--sfl-charcoal);font:inherit;font-weight:600;padding:13px 14px;outline:none;transition:border-color .2s,box-shadow .2s}
-.sfl-form textarea{resize:vertical;line-height:1.7}
+.sfl-form input,.sfl-form select{height:52px}
+.sfl-form textarea{min-height:150px;resize:vertical;line-height:1.7}
 .sfl-form input:focus,.sfl-form select:focus,.sfl-form textarea:focus{border-color:var(--sfl-blue);box-shadow:0 0 0 3px rgba(30,136,229,.12)}
 .sfl-form input[aria-invalid="true"]{border-color:#b42318;box-shadow:0 0 0 3px rgba(180,35,24,.12)}
-.sfl-field-error{margin-top:-2px;color:#b42318;font-size:12px;font-weight:800;line-height:1.5}
+.sfl-field-error{min-height:18px;margin-top:-2px;color:#b42318;font-size:12px;font-weight:800;line-height:1.5}
 .sfl-check{display:flex!important;grid-template-columns:none!important;align-items:center;gap:10px!important;color:var(--sfl-muted)!important;font-weight:800!important}
 .sfl-check input{width:18px;height:18px;flex:0 0 auto}
 .sfl-hp-field{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important}
