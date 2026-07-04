@@ -19,7 +19,7 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.resolve-url.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -33,6 +33,41 @@ jobs:
         with:
           path: public
 
-      - name: Deploy to GitHub Pages
-        id: deployment
+      - name: Deploy to GitHub Pages (attempt 1)
+        id: deploy_1
         uses: actions/deploy-pages@v5
+        continue-on-error: true
+
+      - name: Wait before retry
+        if: steps.deploy_1.outcome != 'success'
+        run: sleep 45
+
+      - name: Deploy to GitHub Pages (attempt 2)
+        id: deploy_2
+        if: steps.deploy_1.outcome != 'success'
+        uses: actions/deploy-pages@v5
+        continue-on-error: true
+
+      - name: Wait before retry
+        if: steps.deploy_1.outcome != 'success' && steps.deploy_2.outcome != 'success'
+        run: sleep 45
+
+      - name: Deploy to GitHub Pages (attempt 3)
+        id: deploy_3
+        if: steps.deploy_1.outcome != 'success' && steps.deploy_2.outcome != 'success'
+        uses: actions/deploy-pages@v5
+
+      - name: Resolve deployment URL
+        id: resolve-url
+        if: always()
+        run: |
+          if [ "${{ steps.deploy_1.outcome }}" = "success" ]; then
+            echo "page_url=${{ steps.deploy_1.outputs.page_url }}" >> "$GITHUB_OUTPUT"
+          elif [ "${{ steps.deploy_2.outcome }}" = "success" ]; then
+            echo "page_url=${{ steps.deploy_2.outputs.page_url }}" >> "$GITHUB_OUTPUT"
+          elif [ "${{ steps.deploy_3.outcome }}" = "success" ]; then
+            echo "page_url=${{ steps.deploy_3.outputs.page_url }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "All GitHub Pages deployment attempts failed."
+            exit 1
+          fi
