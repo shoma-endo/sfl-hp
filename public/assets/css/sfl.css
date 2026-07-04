@@ -33,6 +33,7 @@ a{color:inherit;text-decoration:none}img{display:block;max-width:100%}p{margin:0
   --sfl-ink:#103A71;
   --sfl-muted:#4f5d69;
   --sfl-gold:#C99A1A;
+  --sfl-gold-text:#4a3606;
   --sfl-gold-2:#E7D3A0;
   --sfl-line:#06c755;
   --sfl-blue:#1E88E5;
@@ -97,13 +98,13 @@ body,.sfl-page{background:#F8F5EF}
 .sfl-section.compact{padding:38px 0 78px}
 .sfl-benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .sfl-benefit-grid article{position:relative;padding:26px 28px;background:rgba(255,255,255,.78);border:1px solid rgba(201,154,26,.24);border-radius:6px;box-shadow:var(--sfl-shadow)}
-.sfl-benefit-grid span{display:block;font-family:"Cinzel",Georgia,serif;color:#6d4f08;font-size:13px;letter-spacing:.18em;font-weight:700}
+.sfl-benefit-grid span{display:block;font-family:"Cinzel",Georgia,serif;color:var(--sfl-gold-text);font-size:13px;letter-spacing:.18em;font-weight:700}
 .sfl-benefit-grid h2{margin:8px 0 10px;color:var(--sfl-navy);font-size:22px;font-family:"Noto Serif JP",serif;letter-spacing:.04em}
 .sfl-benefit-grid p{color:var(--sfl-muted);font-weight:800}
 .sfl-before-after{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
 .sfl-case > .sfl-before-after,.sfl-case > .sfl-case-panel:last-child{grid-column:1/-1}
 .sfl-before-after div{padding:18px 20px;background:rgba(255,255,255,.78);border:1px solid rgba(201,154,26,.22);border-radius:6px}
-.sfl-before-after b{display:block;margin-bottom:8px;color:#6d4f08;font-family:"Cinzel",Georgia,serif;letter-spacing:.12em}
+.sfl-before-after b{display:block;margin-bottom:8px;color:var(--sfl-gold-text);font-family:"Cinzel",Georgia,serif;letter-spacing:.12em}
 .sfl-before-after p{color:var(--sfl-muted);font-weight:800}
 @media(max-width:900px){.sfl-benefit-grid,.sfl-before-after{grid-template-columns:1fr}.sfl-section.compact{padding:28px 0 56px}}
 
@@ -200,17 +201,21 @@ body,.sfl-page{background:#F8F5EF}
 @media(max-width:720px){.sfl-recommend-grid,.sfl-feature-cards,.sfl-process-strip,.sfl-benefit-band,.sfl-category-row,.sfl-trust-row,.sfl-flow-support{grid-template-columns:1fr}.sfl-mini-dashboard{padding:12px}.sfl-product-hero{padding-bottom:44px}.sfl-company-statement{width:min(100% - 28px,1180px);border-radius:6px}.sfl-trust-row{width:min(100% - 28px,1380px)}}
 
 /* Mobile touch + a11y */
+.sfl-skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:200;padding:12px 18px;border-radius:4px;background:var(--sfl-navy);color:#fff;font-weight:900;font-size:14px;text-decoration:none}
+.sfl-skip-link:focus,.sfl-skip-link:focus-visible{position:fixed;left:12px;top:12px;width:auto;height:auto;overflow:visible;outline:2px solid var(--sfl-blue);outline-offset:2px;box-shadow:0 0 0 3px rgba(30,136,229,.2)}
+a:focus-visible,button:focus-visible,.sfl-btn:focus-visible{outline:2px solid var(--sfl-blue);outline-offset:2px;box-shadow:0 0 0 3px rgba(30,136,229,.12)}
+.sfl-menu{min-width:48px;min-height:48px;padding:11px}
 .sfl-drawer-panel > a.sfl-btn{width:100%;margin-top:8px;padding:0 16px;justify-content:center;border-bottom:none}
 .sfl-drawer-panel > a.sfl-btn.sfl-btn-gold{margin-top:16px}
 .sfl-drawer-panel > a.sfl-btn.sfl-btn-outline{border:1px solid #18304f}
 .sfl-drawer-panel{padding-bottom:max(26px,env(safe-area-inset-bottom))}
-.sfl-drawer-close{align-self:flex-end;min-width:44px;min-height:44px;padding:0;display:grid;place-items:center;border:0;background:none;font-size:28px;line-height:1;color:var(--sfl-ink);cursor:pointer}
+.sfl-drawer-close{align-self:flex-end;min-width:48px;min-height:48px;padding:0;display:grid;place-items:center;border:0;background:none;font-size:28px;line-height:1;color:var(--sfl-ink);cursor:pointer}
 .sfl-footer-nav a{display:flex;align-items:center;min-height:44px;padding:10px 0}
-.sfl-en,.sfl-hero-kicker{color:#6d4f08}
+.sfl-en,.sfl-hero-kicker{color:var(--sfl-gold-text)}
 .sfl-section.navy .sfl-en{color:var(--sfl-gold-2)}
-.sfl-kpi strong,.sfl-table th,.sfl-post-body small,.sfl-feature-card span,.sfl-form label span,.sfl-proof-icon{color:#6d4f08}
+.sfl-kpi strong,.sfl-table th,.sfl-post-body small,.sfl-feature-card span,.sfl-form label span,.sfl-proof-icon{color:var(--sfl-gold-text)}
 .sfl-section.navy .sfl-kpi strong{color:var(--sfl-gold-2)}
-.sfl-icon{color:#6d4f08}
+.sfl-icon{color:var(--sfl-gold-text)}
 
 /* Hero conversion */
 .sfl-hero-lead strong{
@@ -445,9 +450,9 @@ html.sfl-motion-ready .sfl-section-head[data-sfl-line-left].sfl-is-visible::afte
 .sfl-page{padding-top:var(--sfl-header-height)}
 
 /* SALON FLOW ONE — pricing series label */
-.sfl-price-series{display:block;font-family:var(--sfl-font-en,"Cinzel",serif);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sfl-gold);margin-bottom:10px;font-weight:600}
+.sfl-price-series{display:block;font-family:var(--sfl-font-en,"Cinzel",serif);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sfl-gold-text);margin-bottom:10px;font-weight:600}
 .sfl-price-group-head{margin-bottom:28px}
-.sfl-price-group-head .sfl-en{display:block;font-family:var(--sfl-font-en,"Cinzel",serif);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--sfl-gold);margin-bottom:8px}
+.sfl-price-group-head .sfl-en{display:block;font-family:var(--sfl-font-en,"Cinzel",serif);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--sfl-gold-text);margin-bottom:8px}
 .sfl-price-group-head h2{font-size:28px;color:var(--sfl-navy);margin:0 0 10px}
 .sfl-price-group-head p{color:var(--sfl-muted);font-weight:700;margin:0;max-width:720px}
 .sfl-price-grid-single{grid-template-columns:minmax(280px,480px)!important;justify-content:center}

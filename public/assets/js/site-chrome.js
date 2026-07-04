@@ -34,8 +34,7 @@
   const drawerItems = [
     ...navItems,
     ...serviceNavItems,
-    ...relatedProductItems,
-    { slug: 'contact', label: 'お問い合わせ', key: 'contact' }
+    ...relatedProductItems
   ];
   const pageHref = (item) => {
     const slug = typeof item === 'string' ? item : item.slug;
@@ -71,6 +70,18 @@
   };
   const mount = document.querySelector('[data-site-header]');
   const active = mount?.dataset.active || '';
+  const main = document.querySelector('main');
+  if (main) {
+    if (!main.id) main.id = 'main-content';
+    if (!main.hasAttribute('tabindex')) main.setAttribute('tabindex', '-1');
+  }
+  if (!document.querySelector('.sfl-skip-link')) {
+    const skipLink = document.createElement('a');
+    skipLink.className = 'sfl-skip-link';
+    skipLink.href = '#main-content';
+    skipLink.textContent = 'メインコンテンツへスキップ';
+    document.body.prepend(skipLink);
+  }
   const serviceSlugs = servicesCatalog.map((service) => service.slug);
   const navLinks = navItems.map((item) => {
     const isActive = active === item.key || (item.key === 'services' && serviceSlugs.includes(active));
@@ -103,14 +114,17 @@
       document.body.style.overflow = '';
       if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
     };
+    const focusFirstDrawerControl = () => {
+      const focusables = getFocusables();
+      if (focusables.length) focusables[0].focus();
+    };
     const openDrawer = () => {
       lastFocus = document.activeElement;
       drawer.classList.add('open');
       drawer.setAttribute('aria-hidden', 'false');
       open.setAttribute('aria-expanded', 'true');
       document.body.style.overflow = 'hidden';
-      const focusables = getFocusables();
-      if (focusables.length) focusables[0].focus();
+      requestAnimationFrame(() => requestAnimationFrame(focusFirstDrawerControl));
     };
     open.addEventListener('click', openDrawer);
     drawer.addEventListener('click', (event) => {
