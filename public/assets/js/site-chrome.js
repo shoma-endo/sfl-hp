@@ -3,7 +3,7 @@
     { slug: 'home', label: 'ホーム', key: 'home' },
     { slug: 'services', label: 'サービス', key: 'services' },
     { slug: 'case-study', label: '導入事例', key: 'case' },
-    { slug: 'knowledge', label: 'ナレッジ', key: 'knowledge' },
+    { slug: 'knowledge', label: 'コラム', key: 'knowledge' },
     { slug: 'company', label: '会社概要', key: 'company' }
   ];
   const footerItems = [
