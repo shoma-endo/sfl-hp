@@ -17,68 +17,14 @@
     visual: [160, 720, 24, 'snap device'],
     pricing: [520, 400, 10, ''],
     meta: [600, 380, 8, ''],
-    salon: [160, 720, 0, 'salon'],
     device: [280, 640, 32, 'snap device'],
-    'float-notice': [1100, 420, 12, 'float'],
-    'float-doc': [1200, 420, 12, 'float'],
-    'float-karte': [1300, 420, 12, 'float']
+    'float-notice': [1100, 420, 12, 'float']
   };
 
-  const TABLET_FLOAT = { 'float-notice': 1010, 'float-doc': 1110, 'float-karte': 1210 };
-  const MOBILE_OVERRIDE = { salon: 100, device: 200 };
+  const TABLET_FLOAT = { 'float-notice': 1010 };
+  const MOBILE_OVERRIDE = { device: 200 };
 
   let heroPlayAt = 0;
-
-  const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
-
-  const formatHeroCount = (el, value) => {
-    const prefix = el.getAttribute('data-sfl-count-prefix') || '';
-    const suffix = el.getAttribute('data-sfl-count-suffix') || '';
-    const decimals = Number(el.getAttribute('data-sfl-count-decimals') || 0);
-    const sep = el.getAttribute('data-sfl-count-separator');
-    let num = decimals > 0 ? value.toFixed(decimals) : String(Math.round(value));
-    if (sep === ',') {
-      const parts = num.split('.');
-      parts[0] = Number(parts[0]).toLocaleString('ja-JP');
-      num = parts.join('.');
-    }
-    return prefix + num + suffix;
-  };
-
-  const animateHeroCount = (el, end, duration, delay) => {
-    const start = Number(el.getAttribute('data-sfl-count-start') || 0);
-    const startAt = performance.now() + delay;
-
-    const tick = (now) => {
-      const elapsed = now - startAt;
-      if (elapsed < 0) {
-        requestAnimationFrame(tick);
-        return;
-      }
-      const progress = Math.min(elapsed / duration, 1);
-      const current = start + (end - start) * easeOutCubic(progress);
-      el.textContent = formatHeroCount(el, current);
-      if (progress < 1) requestAnimationFrame(tick);
-      else el.textContent = formatHeroCount(el, end);
-    };
-
-    requestAnimationFrame(tick);
-  };
-
-  const startHeroKpiCountUp = (hero, t) => {
-    const timing = getHeroTiming('device', t);
-    if (!timing) return;
-
-    const [deviceDelay, deviceDur] = timing;
-    const baseDelay = deviceDelay + Math.round(deviceDur * 0.42);
-
-    hero.querySelectorAll('[data-sfl-count]').forEach((el, i) => {
-      const end = Number(el.getAttribute('data-sfl-count'));
-      if (!Number.isFinite(end)) return;
-      el.textContent = formatHeroCount(el, 0);
-      animateHeroCount(el, end, 1200 + i * 80, baseDelay + i * 120);
-    });
-  };
 
   const tier = () => {
     if (window.matchMedia('(max-width: 720px)').matches) return 'm';
@@ -151,11 +97,10 @@
   };
 
   const applyEnterFlags = (el, flags) => {
-    el.classList.remove('sfl-enter-snap', 'sfl-enter-blur', 'sfl-enter-scale', 'sfl-enter-salon', 'sfl-enter-device');
+    el.classList.remove('sfl-enter-snap', 'sfl-enter-blur', 'sfl-enter-scale', 'sfl-enter-device');
     if (flags.includes('snap')) el.classList.add('sfl-enter-snap');
     if (flags.includes('blur')) el.classList.add('sfl-enter-blur');
     if (flags.includes('scale')) el.classList.add('sfl-enter-scale');
-    if (flags.includes('salon')) el.classList.add('sfl-enter-salon');
     if (flags.includes('device')) el.classList.add('sfl-enter-device');
   };
 
@@ -244,7 +189,6 @@
 
         window.setTimeout(() => {
           el.classList.add('sfl-is-visible');
-          if (key === 'device') startHeroKpiCountUp(hero, t);
           if (floatLoop && flags.includes('float')) {
             window.setTimeout(() => el.classList.add('sfl-float-active'), dur + 400);
           }
