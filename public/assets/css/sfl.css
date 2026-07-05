@@ -334,12 +334,12 @@ a:focus-visible,button:focus-visible,.sfl-btn:focus-visible{outline:2px solid va
 
 /* Hero — desktop: visual columnを広げて画像を大きく */
 @media (min-width:1101px){
-  .sfl-hero-grid{grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);gap:40px;align-items:center}
+  .sfl-hero-grid{grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);gap:52px;align-items:center}
   .sfl-hero{overflow:visible}
   .sfl-hero-visual{overflow:visible}
   .sfl-hero h1{
-    overflow-wrap:normal;word-break:keep-all;line-height:1.32;letter-spacing:.03em;
-    font-size:clamp(36px,2.8vw,44px);
+    overflow-wrap:break-word;word-break:normal;line-height:1.32;letter-spacing:.03em;
+    font-size:clamp(38px,2.6vw,44px);
   }
   .sfl-hero-visual{align-self:center}
 }
@@ -349,12 +349,12 @@ a:focus-visible,button:focus-visible,.sfl-btn:focus-visible{outline:2px solid va
 
 /* Hero — laptop: CTA above fold at 1280×800 */
 @media (min-width:1101px) and (max-width:1360px){
-  .sfl-hero-grid{gap:36px}
+  .sfl-hero-grid{gap:44px}
   .sfl-hero{padding:28px 0 36px}
   .sfl-hero-copy{padding:0}
   .sfl-hero-kicker{margin-bottom:12px;font-size:16px}
-  .sfl-hero h1{font-size:clamp(34px,2.75vw,38px);line-height:1.28;letter-spacing:.02em}
-  .sfl-hero-lead{margin-top:16px;font-size:18px;line-height:1.65}
+  .sfl-hero h1{font-size:clamp(34px,2.6vw,40px);line-height:1.28;letter-spacing:.02em}
+  .sfl-hero-lead{margin-top:16px;font-size:19px;line-height:1.65}
   .sfl-hero-sub{margin-top:14px;font-size:15px;line-height:1.65}
   .sfl-hero-actions{margin-top:18px}
   .sfl-hero-pricing{margin-top:14px;font-size:13px;line-height:1.7}
@@ -363,8 +363,8 @@ a:focus-visible,button:focus-visible,.sfl-btn:focus-visible{outline:2px solid va
 }
 @media (min-width:1101px) and (max-height:860px){
   .sfl-hero{padding:20px 0 28px}
-  .sfl-hero h1{font-size:clamp(32px,2.6vw,36px);line-height:1.26}
-  .sfl-hero-lead{margin-top:12px;font-size:17px;line-height:1.6}
+  .sfl-hero h1{font-size:clamp(34px,2.7vw,38px);line-height:1.26}
+  .sfl-hero-lead{margin-top:12px;font-size:18px;line-height:1.6}
   .sfl-hero-sub{margin-top:10px;font-size:14px;line-height:1.6}
   .sfl-hero-actions{margin-top:14px}
   .sfl-hero-pricing{margin-top:12px;font-size:13px}
