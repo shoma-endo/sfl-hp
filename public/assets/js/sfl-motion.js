@@ -21,11 +21,10 @@
     device: [280, 640, 32, 'snap device'],
     'float-notice': [1100, 420, 12, 'float'],
     'float-doc': [1200, 420, 12, 'float'],
-    'float-karte': [1300, 420, 12, 'float'],
-    'float-staff': [1250, 420, 12, 'float']
+    'float-karte': [1300, 420, 12, 'float']
   };
 
-  const TABLET_FLOAT = { 'float-notice': 1010, 'float-doc': 1110, 'float-karte': 1210, 'float-staff': 1160 };
+  const TABLET_FLOAT = { 'float-notice': 1010, 'float-doc': 1110, 'float-karte': 1210 };
   const MOBILE_OVERRIDE = { salon: 100, device: 200 };
 
   let heroPlayAt = 0;
