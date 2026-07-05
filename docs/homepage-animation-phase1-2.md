@@ -3,8 +3,8 @@
 > **対象:** `public/pages/home/index.html`（第1弾）。下層ページ展開は Phase 2 完了後。  
 > **方針:** 依存ライブラリなし（CSS + `Intersection Observer` + 小さな `sfl-motion.js`）。  
 > **関連:** [homepage-improvement-learnings.md](./homepage-improvement-learnings.md)  
-> **最終更新:** 2026-07-04（再レビュー反映・init 失敗 / float タイミング）  
-> **ステータス:** 実装済み（ホーム Phase 1–2）
+> **最終更新:** 2026-07-05（ヒーロー右カラムを実写真に置き換え。§3.2/3.3/3.4/3.5/§4 に廃止注記を追加）  
+> **ステータス:** 実装済み（ホーム Phase 1–2）。**2026-07-05 差分:** 右カラムの CSS ダッシュボードモック（`salon-photo` / `device-stage`）を実写真 `.sfl-hero-photo`（`data-sfl-enter="device"`）1枚に統合。float は `.notice`（LINEバッジ）のみ運用し、`.doc`（電子同意書）/ `.karte`（顧客カルテ）と KPI カウントアップは廃止。左カラム（§3.1）・スクロール reveal（§6）・hover（§5）は変更なし。詳細は各節の「※2026-07-05」注記を参照。
 
 ---
 
@@ -286,21 +286,40 @@ html.sfl-motion-ready [data-sfl-reveal]:not(.sfl-is-visible) {
 
 ### 3.2 右カラム（`.sfl-hero-visual`）— PC 基準（≥1101px）
 
+> **※2026-07-05 更新:** `.sfl-salon-photo`（V1）と `.sfl-device-stage`（V2）は実写真 `.sfl-hero-photo`（`data-sfl-enter="device"`）1枚に統合され、V2 のタイミング（280ms / 640ms / snap）のみが残っている。`.sfl-float.doc`（V4）・`.sfl-float.karte`（V5）は要素ごと削除。以下の表は当時の設計意図を残すための履歴として保持する。
+
 | # | 要素 | delay | duration | easing | 初期状態 → 終了状態 |
 |---|------|------:|---------:|--------|---------------------|
-| V1 | `.sfl-salon-photo` | 160ms | 720ms | `--sfl-ease-out` | opacity 0 → 0.58（既存 opacity 維持）, scale(1.04) → 1 |
-| V2 | `.sfl-device-stage` | 280ms | 640ms | `--sfl-ease-snap` | opacity 0 → 1, translateY(32px) → 0, scale(0.96) → 1 |
+| V1 | ~~`.sfl-salon-photo`~~ **廃止（2026-07-05）** | ~~160ms~~ | ~~720ms~~ | ~~`--sfl-ease-out`~~ | opacity 0 → 0.58（既存 opacity 維持）, scale(1.04) → 1 |
+| V2 | `.sfl-hero-photo`（旧 `.sfl-device-stage`） | 280ms | 640ms | `--sfl-ease-snap` | opacity 0 → 1, translateY(32px) → 0, scale(0.96) → 1 |
 | V3 | `.sfl-float.notice` | 1100ms | 420ms | `--sfl-ease-out` | opacity 0 → 1, translateY(12px) → 0 |
-| V4 | `.sfl-float.doc` | 1200ms | 420ms | `--sfl-ease-out` | 同上 |
-| V5 | `.sfl-float.karte` | 1300ms | 420ms | `--sfl-ease-out` | 同上 |
+| V4 | ~~`.sfl-float.doc`~~ **廃止（2026-07-05）** | ~~1200ms~~ | ~~420ms~~ | ~~`--sfl-ease-out`~~ | 同上 |
+| V5 | ~~`.sfl-float.karte`~~ **廃止（2026-07-05）** | ~~1300ms~~ | ~~420ms~~ | ~~`--sfl-ease-out`~~ | 同上 |
 
-**float 開始:** H7 meta 完了（980ms）+ **120ms** 後。CTA 帯（420〜980ms）と **重複しない**。
+**float 開始:** H7 meta 完了（980ms）+ **120ms** 後。CTA 帯（420〜980ms）と **重複しない**。現行は `.notice`（LINEバッジ）のみが float 対象。
 
-**モバイル:** §3.4 参照。float（V3〜V5）は **720px 以下で非表示**（既存 CSS `display:none`）のため **アニメ対象外**。
+**モバイル:** §3.4 参照。float（V3）は **720px 以下で非表示**（既存 CSS `display:none`）のため **アニメ対象外**。
 
-**CSS 整理:** HTML は `.sfl-float.notice` が正式。`sfl.css` に残る `.sfl-float.line` は未使用のため **実装時に `.notice` へ統合または削除**（§11）。
+**CSS 整理:** HTML は `.sfl-float.notice` が正式。`sfl.css` の `.sfl-float.line` は未使用のため削除済み（2026-07-05）。
 
 ### 3.3 ヒーロータイムライン（視覚）— PC
+
+> **※2026-07-05 更新:** 実際のタイムラインは `salon-photo` 行が無く、`device-stage` は `hero-photo`（実写真）に、`float.doc`/`float.karte` は無い。現行版を下に、当時の設計図を参考として残す。
+
+**現行（2026-07-05〜）:**
+
+```
+0ms     kicker ────────────────────▶ 420ms
+80ms         h1 ──────────────────────────▶ 640ms
+200ms                   lead ──────────────────▶ 680ms
+280ms                        hero-photo ────────────────▶ 920ms
+420ms                             CTA ──────────────▶ 900ms
+520ms                                  pricing ────────▶ 920ms
+600ms                                       meta ──────▶ 980ms
+1100ms                                         float.notice ──▶ 1520ms
+```
+
+**旧版（〜2026-07-04・参考）:**
 
 ```
 0ms     kicker ────────────────────▶ 420ms
@@ -334,10 +353,12 @@ html.sfl-motion-ready [data-sfl-reveal]:not(.sfl-is-visible) {
 
 #### 右カラム（1 列レイアウトで copy の下）
 
+> **※2026-07-05 更新:** V1（salon-photo）は廃止。V2 は実写真 `.sfl-hero-photo` として同タイミングのまま残る。
+
 | # | 要素 | delay | duration | easing | 完了時刻 |
 |---|------|------:|---------:|--------|--------:|
-| V1 | `.sfl-salon-photo` | 100ms | 720ms | ease-out | 820ms |
-| V2 | `.sfl-device-stage` | 200ms | 640ms | snap | 840ms |
+| V1 | ~~`.sfl-salon-photo`~~ **廃止（2026-07-05）** | ~~100ms~~ | ~~720ms~~ | ~~ease-out~~ | ~~820ms~~ |
+| V2 | `.sfl-hero-photo`（旧 `.sfl-device-stage`） | 200ms | 640ms | snap | 840ms |
 
 **モバイル FV 注意:** 390px 幅では h1 + lead + CTA で **約 480〜560px** を占有。CTA は **294ms 開始**で 774ms までに完全表示。初回 viewport 外に CTA が落ちる端末では **レイアウト問題**（アニメでは解決不可）— 実機 390px で要確認。
 
@@ -359,13 +380,15 @@ html.sfl-motion-ready [data-sfl-reveal]:not(.sfl-is-visible) {
 
 #### 右カラム
 
+> **※2026-07-05 更新:** V1 は廃止、V2 は実写真として残存。V4/V5（float.doc/karte）は要素ごと削除。
+
 | # | 要素 | delay | duration | easing | 完了時刻 |
 |---|------|------:|---------:|--------|--------:|
-| V1 | `.sfl-salon-photo` | 136ms | 720ms | ease-out | 856ms |
-| V2 | `.sfl-device-stage` | 238ms | 640ms | snap | 878ms |
+| V1 | ~~`.sfl-salon-photo`~~ **廃止（2026-07-05）** | ~~136ms~~ | ~~720ms~~ | ~~ease-out~~ | ~~856ms~~ |
+| V2 | `.sfl-hero-photo`（旧 `.sfl-device-stage`） | 238ms | 640ms | snap | 878ms |
 | V3 | `.sfl-float.notice` | 1010ms | 420ms | ease-out | 1430ms |
-| V4 | `.sfl-float.doc` | 1110ms | 420ms | ease-out | 1530ms |
-| V5 | `.sfl-float.karte` | 1210ms | 420ms | ease-out | 1630ms |
+| V4 | ~~`.sfl-float.doc`~~ **廃止（2026-07-05）** | ~~1110ms~~ | ~~420ms~~ | ~~ease-out~~ | ~~1530ms~~ |
+| V5 | ~~`.sfl-float.karte`~~ **廃止（2026-07-05）** | ~~1210ms~~ | ~~420ms~~ | ~~ease-out~~ | ~~1630ms~~ |
 
 **float 開始:** タブレット H7 完了（890ms）+ **120ms** 後（PC と同ルール）。
 
@@ -395,14 +418,16 @@ html.sfl-motion-ready [data-sfl-reveal]:not(.sfl-is-visible) {
 
 ### 4.2 ループ spec（≥1101px かつ reduce 以外）
 
-**対象:** `.sfl-float.notice` / `.doc` / `.karte`  
+> **※2026-07-05 更新:** `.doc`/`.karte` の float 要素は削除済み。対応する `@keyframes sfl-float-drift-doc`/`-karte` も `sfl.css` から削除した。ループ対象は `.notice` のみ。
+
+**対象:** `.sfl-float.notice`（旧: `.doc` / `.karte` は廃止）
 **開始:** 該当 float の enter 完了 + **400ms** 後に `.sfl-float-active` 付与
 
 | 要素 |  motion | duration | easing | 振幅 | 備考 |
 |------|---------|----------|--------|------|------|
 | `.notice` | translateY | 3600ms | ease-in-out | 0 → -6px → 0 | ループ infinite |
-| `.doc` | translateY | 4200ms | ease-in-out | 0 → -5px → 0 | delay **-800ms**（位相ずらし） |
-| `.karte` | translateY | 3900ms | ease-in-out | 0 → -7px → 0 | delay **-1600ms** |
+| ~~`.doc`~~ | ~~translateY~~ | ~~4200ms~~ | ~~ease-in-out~~ | ~~0 → -5px → 0~~ | **廃止（2026-07-05）** |
+| ~~`.karte`~~ | ~~translateY~~ | ~~3900ms~~ | ~~ease-in-out~~ | ~~0 → -7px → 0~~ | **廃止（2026-07-05）** |
 
 **追加（任意）:** `box-shadow` を 3600ms で `0 14px 42px …` ↔ `0 18px 48px …` に **±8%** 変化。負荷が気になる場合は省略。
 
@@ -742,9 +767,9 @@ JS 側: `window.matchMedia('(prefers-reduced-motion: reduce)')` が true なら 
 | **CSS animation（infinite）** | **≤3 要素** | `.sfl-float-active` の `@keyframes` ループのみ |
 | **hover transition** | 上限外 | ユーザー操作時のみ |
 
-**PC ヒーロー同時 transition のピーク（520〜920ms）:** salon-photo・device-stage・CTA・pricing・meta の **最大 5 要素**が重なる（§0 上限 6 以内）。**float enter は 1100ms 以降**のため CTA 帯と重ならない。820ms 付近に float が載る旧タイムラインは廃止（§3.2）。
+**PC ヒーロー同時 transition のピーク（520〜920ms）:** hero-photo（旧 device-stage）・CTA・pricing・meta の **最大 4 要素**が重なる（§0 上限 6 以内。旧 salon-photo は 2026-07-05 に廃止しさらに余裕ができた）。**float enter は 1100ms 以降**のため CTA 帯と重ならない。820ms 付近に float が載る旧タイムラインは廃止（§3.2）。
 
-**720ms 時点の transition 中:** salon（160ms 開始）・device（280ms）・CTA（420ms）・pricing（520ms 開始）・lead 残り ≒ **4〜5 要素**。
+**720ms 時点の transition 中:** hero-photo（280ms 開始）・CTA（420ms）・pricing（520ms 開始）・lead 残り ≒ **3〜4 要素**（旧 salon 160ms は廃止）。
 
 | 項目 | 上限目安 |
 |------|----------|
@@ -796,8 +821,8 @@ JS 側: `window.matchMedia('(prefers-reduced-motion: reduce)')` が true なら 
 
 | 項目 | 理由 |
 |------|------|
-| KPI カウントアップ | Phase 2 reveal 完了後に追加 |
-| ダッシュボード chart アニメ | JS 負荷・SP 簡略化が必要 |
+| ~~KPI カウントアップ（ヒーローダッシュボード）~~ | Phase 2 reveal 完了後に実装したが、2026-07-05 のヒーロー実写真化でダッシュボードDOM自体を廃止したため **再度撤去**（§13 は learnings 参照）。ダッシュボードモックを復活させる場合のみ再実装候補 |
+| ダッシュボード chart アニメ | 対象の CSS ダッシュボードが廃止済みのため **見送り**（同上） |
 | 下層 `sfl-page-title` reveal | ホーム検証後に横展開 |
 
 ---
@@ -810,3 +835,4 @@ JS 側: `window.matchMedia('(prefers-reduced-motion: reduce)')` が true なら 
 | 2026-07-04 | PC / タブレット / モバイル 3 段 ms 表、IO 別設定、hero-sub reveal、float ループ BP 明確化 |
 | 2026-07-04 | レビュー反映: no-JS フォールバック、IO 属性契約、wide-cta 生成方針、hero-sub mobile 属性、同時アニメ定義 |
 | 2026-07-04 | 再レビュー反映: init 失敗フォールバック、reveal-mobile reduce 対応、hero-sub 属性契約統一、float enter 1100ms 以降へ移動 |
+| 2026-07-05 | ヒーロー右カラムを実写真1枚（`.sfl-hero-photo`）に統合。`salon-photo`/`device-stage`/`float.doc`/`float.karte`/KPIカウントアップを廃止し §3.2〜3.5・§4・§10・§12 に廃止注記を追加。左カラム（§3.1）・reveal（§6）・hover（§5）は変更なし |

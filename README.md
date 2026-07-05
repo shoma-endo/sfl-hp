@@ -15,7 +15,7 @@
 - `public/assets/css/sfl.css`: SFL用の共通スタイル。
 - `public/assets/js/site-chrome.js`: 共通ヘッダー、ドロワー、フッター生成。
 - `public/assets/js/sfl-services-catalog.js`: サービス定義（ナビ・フォームの単一ソース）。
-- `public/assets/js/sfl-lead-form.js`: お問い合わせ・資料請求フォームのマークアップ生成。
+- `public/assets/js/sfl-lead-form.js`: お問い合わせ・資料ダウンロードフォームのマークアップ生成。
 - `public/assets/js/contact-form.js`: フォーム送信・クライアント側バリデーション。
 - `public/assets/js/sfl-wide-cta.js`: ページ下部の共通CTAブロック生成。
 - `public/assets/js/sfl-motion.js`: ホームFVアニメーション・スクロールリビール。
@@ -47,12 +47,12 @@
 
 | ページ | パス | 備考 |
 |---|---|---|
-| SALON FLOW ONE | `/pages/salon-flow-one/` | 美容サロン向け月額伴走。料金・FAQ・導入の流れを集約 |
+| SALON FLOW ONE | `/pages/salon-flow-one/` | 美容サロン向け月額伴走。Cycle Proを中核ツールとして内包。料金・FAQ・導入の流れを集約 |
 | LARK FLOW ONE | `/pages/lark-flow-one/` | Lark活用伴走支援 |
 | AI FLOW ONE | `/pages/ai-flow-one/` | 企業向けAI顧問 |
-| Cycle Pro | `/pages/cycle-pro/` | 業務改善パッケージ |
+| Cycle Pro | `/pages/cycle-pro/` | SALON FLOW ONEの中核ツール（買い切り初期構築）。サービス一覧ハブのカードではなく、SALON FLOW ONE・FAQからの導線でのみ案内 |
 
-サービス定義の更新元は `public/assets/js/sfl-services-catalog.js` です。
+サービス定義の更新元は `public/assets/js/sfl-services-catalog.js` です。`catalog` は FLOW ONE 3商品のみで、サービス一覧ハブ（`pages/services/index.html`）のカードもこの3枚。Cycle Proは `topicExtras` に定義され、お問い合わせフォームの選択肢としてのみ登場します。
 
 ### その他
 
@@ -60,7 +60,7 @@
 |---|---|
 | よくある質問 | `/pages/faq/` |
 | お問い合わせ | `/pages/contact/` |
-| 資料請求 | `/pages/download/` |
+| 資料ダウンロード | `/pages/download/` |
 
 `sitemap.xml` に載せる公開対象は上記です。
 
@@ -89,9 +89,10 @@
 ## デザイン・CTA方針
 
 - ベースカラーはブランドガイド準拠: `#F8F5EF`, `#103A71`, `#C99A1A`, `#E7D3A0`, `#1E88E5`, `#333333`。
-- CTAは「お問い合わせ」と「資料請求」に統一しています。
-- 公式LINEへの直接誘導CTAは使いません。
+- CTAは「お問い合わせ」と「資料ダウンロード」に統一しています。
+- 公式LINEへの直接誘導CTAは使いません。ホームFVの「公式LINEと連携可能」バッジは連携訴求の表示であり、外部LINEへの遷移リンクではありません。
 - 共通ヘッダー・フッター・ドロワーは `site-chrome.js` で生成します。
+- ホームFVの右ビジュアルは実写真1枚（`public/assets/images/hero-salon-devices.jpg`）です。CSSで組んだダッシュボードのモックではなく、`sfl.css` の `.sfl-hero-photo img` で `mask-image` により縁をクリーム背景へ溶け込ませています。差し替える場合は同じ比率でクロップし、ファイル名を変えるなら `sfl.css` 側の参照も更新してください。
 
 ## コマンド
 
@@ -138,7 +139,7 @@ GitHub Actionsで `public/` をGitHub Pagesに公開します。
 
 ## フォーム送信
 
-お問い合わせと資料請求は `/api/contact` へ送信します。送信内容はメール送信し、Lark webhookが設定されている場合はLarkチャットにも通知します。
+お問い合わせと資料ダウンロードは `/api/contact` へ送信します。送信内容はメール送信し、Lark webhookが設定されている場合はLarkチャットにも通知します。
 
 フォーム項目:
 
