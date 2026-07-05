@@ -96,7 +96,7 @@ body{background:var(--sfl-bg);color:var(--sfl-charcoal);font-family:"Noto Sans J
 /* Align body background with header */
 body,.sfl-page{background:#F8F5EF}
 .sfl-header{background:rgba(248,245,239,.98)}
-.sfl-hero{background:radial-gradient(circle at 82% 20%,rgba(30,136,229,.06),transparent 30%),linear-gradient(180deg,#F8F5EF 0%,#F8F5EF 68%,#faf8f3 100%)}
+.sfl-hero{background:linear-gradient(180deg,#F8F5EF 0%,#F8F5EF 68%,#faf8f3 100%)}
 .sfl-section.soft,.sfl-page-title{background:#F8F5EF}
 .sfl-section:not(.navy){background:#F8F5EF}
 .sfl-proof,.sfl-card,.sfl-step,.sfl-case-panel,.sfl-kpi,.sfl-price,.sfl-faq article,.sfl-post,.sfl-table,.sfl-wide-cta{background:rgba(255,255,255,.72)}
@@ -256,46 +256,20 @@ a:focus-visible,button:focus-visible,.sfl-btn:focus-visible{outline:2px solid va
 }
 .sfl-hero-actions{align-items:stretch}
 .sfl-hero-actions .sfl-btn-primary{width:fit-content;max-width:100%}
-.sfl-hero-visual{position:relative;min-height:400px;width:100%}
+.sfl-hero-visual{position:relative;min-height:0;width:100%}
 .sfl-salon-photo{
-  position:absolute;inset:0 0 32% 0;border-radius:0 0 0 110px;overflow:hidden;
-  background:
-    radial-gradient(ellipse 70% 55% at 72% 28%,rgba(255,248,235,.95),transparent 62%),
-    linear-gradient(165deg,#ebe3d6 0%,#f6f1ea 38%,#e9e0d3 72%,#ddd3c4 100%);
+  position:absolute;inset:0;border-radius:0 0 0 110px;overflow:hidden;pointer-events:none;z-index:0;
+  background:linear-gradient(165deg,#ebe3d6 0%,#f6f1ea 38%,#e9e0d3 72%,#ddd3c4 100%);
   background-image:none;
-  opacity:.58;filter:saturate(.88) brightness(1.04);
+  opacity:.28;filter:saturate(.82) brightness(1.04);
 }
-.sfl-salon-scene{position:absolute;inset:0}
-.sfl-salon-glow{
-  position:absolute;top:10%;right:14%;width:38%;aspect-ratio:1;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,236,200,.55) 0%,transparent 68%);
-  animation:sfl-salon-glow 5s ease-in-out infinite;
-}
-.sfl-salon-mirror{
-  position:absolute;top:12%;right:16%;width:32%;aspect-ratio:1;border-radius:50%;
-  background:radial-gradient(circle at 42% 36%,#fff 0%,#f3ece2 28%,#d9cfc0 62%,#c5b9a8 100%);
-  box-shadow:0 0 0 7px rgba(255,255,255,.7),0 0 0 9px rgba(201,154,26,.22),0 0 44px rgba(255,228,180,.42);
-  animation:sfl-mirror-glow 4.2s ease-in-out infinite;
-}
-.sfl-salon-mirror::after{
-  content:"";position:absolute;inset:18%;border-radius:50%;
-  background:linear-gradient(135deg,rgba(255,255,255,.55),transparent 55%);
-}
-.sfl-salon-vanity{
-  position:absolute;bottom:10%;left:8%;width:46%;height:22%;border-radius:10px 10px 4px 4px;
-  background:linear-gradient(180deg,#f7f3ec,#e8dfd2);box-shadow:0 8px 24px rgba(16,58,113,.08);
-}
-.sfl-salon-vanity::before{
-  content:"";position:absolute;top:22%;left:8%;right:8%;height:3px;border-radius:999px;background:rgba(201,154,26,.35);
-}
-.sfl-salon-chair{
-  position:absolute;bottom:6%;left:18%;width:28%;height:24%;border-radius:42% 42% 6px 6px;
-  background:linear-gradient(180deg,#d8cfc3,#b8aea2);opacity:.82;
-}
+.sfl-salon-scene{display:none}
 .sfl-device-stage{
-  position:absolute;left:0;right:0;bottom:0;padding:0;
+  position:relative;left:auto;right:auto;bottom:auto;padding:0;z-index:1;
   border:none;background:transparent;box-shadow:none;backdrop-filter:none;
 }
+.sfl-hero-visual > .sfl-float.doc,
+.sfl-hero-visual > .sfl-float.karte{display:none}
 .sfl-laptop{position:relative;width:100%;max-width:100%}
 .sfl-laptop-shell{
   position:relative;padding:10px;border-radius:28px;
@@ -492,7 +466,6 @@ html.sfl-motion-ready .sfl-hero-played [data-sfl-enter="device"].sfl-is-visible 
 .sfl-proof-row{margin-top:20px;margin-bottom:20px}
 @media(max-width:1100px){
   .sfl-hero{padding:40px 0}
-  .sfl-hero-visual{min-height:500px}
 }
 @media(max-width:900px){.sfl-section.compact{padding:24px 0 36px}}
 @media(max-width:720px){
@@ -507,12 +480,9 @@ html.sfl-motion-ready .sfl-hero-played [data-sfl-enter="device"].sfl-is-visible 
   .sfl-hero-lead{margin-top:16px;line-height:1.7;font-size:16px}
   .sfl-hero-sub{margin-top:12px;line-height:1.65;font-size:14px}
   .sfl-hero-actions{margin-top:20px;margin-bottom:16px}
-  .sfl-hero-visual{margin-top:8px;min-height:380px}
-  .sfl-salon-photo{position:relative;height:180px;margin-bottom:-46px;inset:auto;border-radius:0 0 0 70px}
-  .sfl-salon-mirror{top:8%;right:12%;width:36%}
-  .sfl-salon-vanity{bottom:8%;height:26%}
-  .sfl-salon-chair{bottom:4%;height:28%}
-  .sfl-device-stage{position:relative;bottom:auto;padding:0}
+  .sfl-hero-visual{margin-top:8px}
+  .sfl-salon-photo{border-radius:0 0 0 70px;opacity:.22}
+  .sfl-device-stage{padding:0}
   .sfl-hero-visual .sfl-line-badge{display:none}
   .sfl-hero-staff-panel{display:none}
   .sfl-hero-dash-range,.sfl-hero-dash-sync{display:none}
@@ -545,7 +515,7 @@ html.sfl-motion-ready .sfl-hero-played [data-sfl-enter="device"].sfl-is-visible 
 /* Hero — desktop: visual columnを広げて画像を大きく */
 @media (min-width:1101px){
   .sfl-hero-grid{grid-template-columns:minmax(0,.84fr) minmax(0,1.16fr);gap:40px;align-items:center}
-  .sfl-hero-visual{min-height:520px;align-self:stretch}
+  .sfl-hero-visual{align-self:center}
   .sfl-hero-visual .sfl-dashboard-body{min-height:280px;grid-template-columns:128px 1fr}
   .sfl-hero-visual .sfl-dashboard-bar.sfl-hero-dash-bar{height:34px;font-size:12px}
   .sfl-hero-visual .sfl-dashboard-body{height:calc(100% - 34px)}
@@ -566,7 +536,6 @@ html.sfl-motion-ready .sfl-hero-played [data-sfl-enter="device"].sfl-is-visible 
 }
 @media (min-width:1361px){
   .sfl-hero-grid{grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:48px}
-  .sfl-hero-visual{min-height:560px}
   .sfl-hero-visual .sfl-dashboard-body{min-height:300px;grid-template-columns:136px 1fr}
   .sfl-hero-visual .sfl-pie-channel{width:68px;height:68px}
   .sfl-hero-visual .sfl-pie-menu{width:54px;height:54px}
@@ -586,7 +555,6 @@ html.sfl-motion-ready .sfl-hero-played [data-sfl-enter="device"].sfl-is-visible 
   .sfl-hero-sub{margin-top:14px;font-size:15px;line-height:1.65}
   .sfl-hero-actions{margin-top:18px}
   .sfl-hero-pricing{margin-top:14px;font-size:13px;line-height:1.7}
-  .sfl-hero-visual{min-height:500px}
   .sfl-hero-visual .sfl-dashboard-body{min-height:260px}
   .sfl-hero-staff-panel{display:none}
 }
