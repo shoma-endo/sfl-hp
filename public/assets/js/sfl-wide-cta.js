@@ -5,8 +5,8 @@
     .replace(/"/g, '&quot;');
 
   const contactDownloadActions = [
-    { label: 'お問い合わせ', href: '../contact/index.html', className: 'sfl-btn sfl-btn-gold' },
-    { label: '資料請求', href: '../download/index.html', className: 'sfl-btn sfl-btn-outline' }
+    { label: '無料相談する', href: '../contact/index.html', className: 'sfl-btn sfl-btn-gold' },
+    { label: '資料を取り寄せる', href: '../download/index.html', className: 'sfl-btn sfl-btn-outline' }
   ];
 
   const PRESETS = {
@@ -34,7 +34,7 @@
       title: '具体的な導入相談も可能です',
       description: '資料だけで判断しづらい内容は、サロンの状況に合わせて個別にご案内します。',
       actions: [
-        { label: 'お問い合わせ', href: '../contact/index.html', className: 'sfl-btn sfl-btn-gold' },
+        { label: '無料相談する', href: '../contact/index.html', className: 'sfl-btn sfl-btn-gold' },
         { label: '導入事例を見る', href: '../case-study/index.html', className: 'sfl-btn sfl-btn-outline' }
       ]
     },

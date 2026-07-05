@@ -14,6 +14,7 @@
     lead: [200, 480, 20, 'blur'],
     sub: [320, 420, 16, ''],
     actions: [420, 480, 12, 'snap scale'],
+    visual: [160, 720, 24, 'snap device'],
     pricing: [520, 400, 10, ''],
     meta: [600, 380, 8, ''],
     salon: [160, 720, 0, 'salon'],

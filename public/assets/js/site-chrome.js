@@ -1,5 +1,30 @@
 (() => {
   const servicesCatalog = window.SFL_SERVICES?.catalog || [];
+  const ctaPrimary = { slug: 'contact', label: '無料相談する' };
+  const ctaSecondary = { slug: 'download', label: '資料を取り寄せる' };
+  const footerTagline = '紙カルテ・同意書・売上管理をつなぎ、美容サロンの運営を数字で改善できる状態へ整えます。';
+  const footerTrustLines = [
+    '合同会社SFL / 兵庫県神戸市中央区 / 法人番号 8140003023662',
+    '通常1〜2営業日以内に返信します'
+  ];
+  const socialLinks = [
+    {
+      label: 'note（SFL）',
+      href: 'https://note.com/sfl_lark_dx_ai',
+      icon: '../../assets/icons/icon-note.svg'
+    },
+    {
+      label: 'Instagram（SALON FLOW LAB.）',
+      href: 'https://www.instagram.com/salonflowlab_lark/',
+      icon: '../../assets/icons/icon-instagram.svg'
+    }
+  ];
+  const renderSocialLinks = () => socialLinks.map((item) => ''
+    + '<a class="sfl-social-link" href="' + item.href + '" target="_blank" rel="noopener noreferrer" aria-label="' + item.label + '">'
+    + '<img src="' + item.icon + '" alt="" width="22" height="22" decoding="async">'
+    + '</a>'
+  ).join('');
+  const socialBlock = (className) => '<div class="' + className + '" aria-label="SNS">' + renderSocialLinks() + '</div>';
   const navItems = [
     { slug: 'home', label: 'ホーム', key: 'home' },
     { slug: 'services', label: 'サービス', key: 'services' },
@@ -10,8 +35,8 @@
     { slug: 'cycle-pro', label: 'Cycle Pro', key: 'cycle' }
   ];
   const contactItems = [
-    { slug: 'download', label: '資料請求', key: 'download' },
-    { slug: 'contact', label: 'お問い合わせ', key: 'contact' }
+    { slug: 'download', label: ctaSecondary.label, key: 'download' },
+    { slug: 'contact', label: '無料相談する', key: 'contact' }
   ];
   const serviceNavItems = servicesCatalog.map((service) => ({
     slug: service.slug,
@@ -20,7 +45,8 @@
   }));
   const siteFooterItems = [
     ...navItems,
-    { slug: 'faq', label: 'よくある質問', key: 'faq' }
+    { slug: 'faq', label: 'よくある質問', key: 'faq' },
+    { slug: 'privacy', label: 'プライバシーポリシー', key: 'privacy' }
   ];
   const footerServiceItems = [
     ...serviceNavItems,
@@ -41,7 +67,11 @@
     const hash = typeof item === 'object' && item.hash ? item.hash : '';
     return '../' + slug + '/index.html' + hash;
   };
-  const linkList = (items) => items.map((item) => '<a href="' + pageHref(item) + '">' + item.label + '</a>').join('');
+  const linkList = (items) => items.map((item) => {
+    const isActive = active === item.key;
+    const current = isActive ? ' aria-current="page"' : '';
+    return '<a href="' + pageHref(item) + '"' + current + '>' + item.label + '</a>';
+  }).join('');
   const prefetched = new Set();
   const prefetchPage = (href) => {
     if (!href || prefetched.has(href)) return;
@@ -85,20 +115,26 @@
   const serviceSlugs = servicesCatalog.map((service) => service.slug);
   const navLinks = navItems.map((item) => {
     const isActive = active === item.key || (item.key === 'services' && serviceSlugs.includes(active));
-    return '<a href="' + pageHref(item) + '" class="' + (isActive ? 'active' : '') + '">' + item.label + '</a>';
+    const current = isActive ? ' aria-current="page"' : '';
+    return '<a href="' + pageHref(item) + '" class="' + (isActive ? 'active' : '') + '"' + current + '>' + item.label + '</a>';
   }).join('');
   if (mount) {
-    mount.outerHTML = '<header class="sfl-header"><div class="sfl-nav-wrap"><a class="sfl-brand" href="' + pageHref('home') + '" aria-label="合同会社SFL SALON FLOW LAB."><img class="sfl-logo" src="../../assets/images/sfl-logo-primary.png" alt="合同会社SFL SALON FLOW LAB."></a><nav class="sfl-nav">' + navLinks + '</nav><div class="sfl-header-actions"><a class="sfl-btn sfl-btn-gold" href="' + pageHref('contact') + '">お問い合わせ</a><a class="sfl-btn sfl-btn-outline" href="' + pageHref('download') + '">資料請求</a></div><button class="sfl-menu" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="sfl-drawer" data-open-drawer><span></span><span></span><span></span></button></div></header>';
+    mount.outerHTML = '<header class="sfl-header"><div class="sfl-nav-wrap"><a class="sfl-brand" href="' + pageHref('home') + '" aria-label="合同会社SFL SALON FLOW LAB."><img class="sfl-logo" src="../../assets/images/sfl-logo-primary.png" alt="合同会社SFL SALON FLOW LAB."></a><nav class="sfl-nav">' + navLinks + '</nav><div class="sfl-header-actions"><a class="sfl-btn sfl-btn-gold" href="' + pageHref(ctaPrimary) + '">' + ctaPrimary.label + '</a><a class="sfl-btn sfl-btn-outline" href="' + pageHref(ctaSecondary) + '">' + ctaSecondary.label + '</a></div><button class="sfl-menu" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="sfl-drawer" data-open-drawer><span></span><span></span><span></span></button></div></header>';
   }
   const drawerMount = document.querySelector('[data-site-drawer]');
   if (drawerMount) {
-    const drawerLinks = drawerItems.map((item) => '<a href="' + pageHref(item) + '">' + item.label + '</a>').join('');
-    drawerMount.outerHTML = '<div class="sfl-drawer" id="sfl-drawer" data-drawer role="dialog" aria-modal="true" aria-label="サイトメニュー" aria-hidden="true"><div class="sfl-drawer-panel"><button class="sfl-drawer-close" type="button" aria-label="閉じる" data-close-drawer>×</button>' + drawerLinks + '<a class="sfl-btn sfl-btn-gold" href="' + pageHref('contact') + '">お問い合わせ</a><a class="sfl-btn sfl-btn-outline" href="' + pageHref('download') + '">資料請求</a></div></div>';
+    const drawerLinks = drawerItems.map((item) => {
+      const isActive = active === item.key || (item.key === 'services' && serviceSlugs.includes(active));
+      const current = isActive ? ' aria-current="page"' : '';
+      return '<a href="' + pageHref(item) + '"' + current + '>' + item.label + '</a>';
+    }).join('');
+    drawerMount.outerHTML = '<div class="sfl-drawer" id="sfl-drawer" data-drawer role="dialog" aria-modal="true" aria-label="サイトメニュー" aria-hidden="true"><div class="sfl-drawer-panel"><button class="sfl-drawer-close" type="button" aria-label="閉じる" data-close-drawer>×</button>' + drawerLinks + '<a class="sfl-btn sfl-btn-gold" href="' + pageHref(ctaPrimary) + '">' + ctaPrimary.label + '</a><a class="sfl-btn sfl-btn-outline" href="' + pageHref(ctaSecondary) + '">' + ctaSecondary.label + '</a>' + socialBlock('sfl-drawer-social') + '</div></div>';
   }
   const footerMount = document.querySelector('[data-site-footer]');
   if (footerMount) {
     const footerCols = footerGroups.map((group) => '<nav class="sfl-footer-col" aria-label="' + group.title + '"><h2 class="sfl-footer-col-title">' + group.title + '</h2><div class="sfl-footer-nav">' + linkList(group.items) + '</div></nav>').join('');
-    footerMount.outerHTML = '<footer class="sfl-footer"><div class="sfl-footer-grid"><div><div class="sfl-footer-brand"><span>合同会社SFL</span><strong>SALON FLOW LAB.</strong><p>美容サロンの現場に寄り添い、Lark・AI・業務データを活用した業務改善とDX支援を行います。</p></div></div><div class="sfl-footer-links">' + footerCols + '</div></div><p class="sfl-copy">© <span data-year></span> SFL / SALON FLOW LAB. All Rights Reserved.</p></footer>';
+    const footerTrust = footerTrustLines.map((line) => '<p class="sfl-footer-trust">' + line + '</p>').join('');
+    footerMount.outerHTML = '<footer class="sfl-footer"><div class="sfl-footer-grid"><div><div class="sfl-footer-brand"><span>合同会社SFL</span><strong>SALON FLOW LAB.</strong><p>' + footerTagline + '</p>' + footerTrust + socialBlock('sfl-social') + '</div></div><div class="sfl-footer-links">' + footerCols + '</div></div><p class="sfl-copy">© <span data-year></span> SFL / SALON FLOW LAB. All Rights Reserved. · <a href="' + pageHref('privacy') + '">プライバシーポリシー</a></p></footer>';
   }
   document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
   const drawer = document.querySelector('[data-drawer]');
