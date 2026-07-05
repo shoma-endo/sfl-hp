@@ -256,8 +256,8 @@ a:focus-visible,button:focus-visible,.sfl-btn:focus-visible{outline:2px solid va
 }
 .sfl-hero-actions{align-items:stretch}
 .sfl-hero-actions .sfl-btn-primary{width:fit-content;max-width:100%}
-.sfl-hero-visual{display:flex;align-items:center;justify-content:center;min-height:0}
-.sfl-hero-photo{display:block;width:100%;max-width:600px;height:auto;aspect-ratio:1672/941;border-radius:14px;box-shadow:0 24px 60px rgba(16,58,113,.12);object-fit:contain}
+.sfl-hero-visual{display:flex;align-items:center;justify-content:center;min-height:0;width:100%}
+.sfl-hero-photo{display:block;width:100%;max-width:100%;height:auto;aspect-ratio:1672/941;border-radius:16px;box-shadow:0 28px 70px rgba(16,58,113,.14);object-fit:cover;object-position:center top}
 .sfl-hero-pricing{margin:18px 0 0;color:var(--sfl-muted);font-size:14px;font-weight:800;line-height:1.85}
 .sfl-hero-pricing strong{color:var(--sfl-navy)}
 .sfl-hero-meta{margin:4px 0 0}
@@ -294,7 +294,7 @@ a:focus-visible,button:focus-visible,.sfl-btn:focus-visible{outline:2px solid va
   .sfl-hero-sub{margin-top:12px;line-height:1.65;font-size:14px}
   .sfl-hero-actions{margin-top:20px;margin-bottom:16px}
   .sfl-hero-visual{margin-top:8px}
-  .sfl-hero-photo{max-width:100%;border-radius:10px;box-shadow:0 16px 40px rgba(16,58,113,.1)}
+  .sfl-hero-photo{max-width:100%;min-height:0;max-height:none;border-radius:10px;box-shadow:0 16px 40px rgba(16,58,113,.1);object-fit:cover}
   .sfl-proof-row{grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px;margin-bottom:16px}
   .sfl-proof{min-height:76px;padding:12px 10px;font-size:13px;line-height:1.45}
   .sfl-proof-icon{font-size:24px}
@@ -307,9 +307,21 @@ a:focus-visible,button:focus-visible,.sfl-btn:focus-visible{outline:2px solid va
   .sfl-recommend-grid article{padding:var(--sfl-card-pad-mobile);padding-left:58px}
 }
 
-/* Hero — laptop: CTA above fold at 1280×800 (copy column was too narrow → H1 wrapped ~577px) */
+/* Hero — desktop: visual columnを広げて画像を大きく */
+@media (min-width:1101px){
+  .sfl-hero-grid{grid-template-columns:minmax(0,.84fr) minmax(0,1.16fr);gap:40px;align-items:center}
+  .sfl-hero-visual{min-height:420px;align-self:stretch}
+  .sfl-hero-photo{min-height:380px;max-height:520px;object-fit:cover}
+}
+@media (min-width:1361px){
+  .sfl-hero-grid{grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:48px}
+  .sfl-hero-visual{min-height:460px}
+  .sfl-hero-photo{min-height:420px;max-height:560px}
+}
+
+/* Hero — laptop: CTA above fold at 1280×800 */
 @media (min-width:1101px) and (max-width:1360px){
-  .sfl-hero-grid{grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:32px;align-items:start}
+  .sfl-hero-grid{grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);gap:36px;align-items:center}
   .sfl-hero{padding:28px 0 36px}
   .sfl-hero-copy{padding:0}
   .sfl-hero-kicker{margin-bottom:12px;font-size:16px}
@@ -318,7 +330,8 @@ a:focus-visible,button:focus-visible,.sfl-btn:focus-visible{outline:2px solid va
   .sfl-hero-sub{margin-top:14px;font-size:15px;line-height:1.65}
   .sfl-hero-actions{margin-top:18px}
   .sfl-hero-pricing{margin-top:14px;font-size:13px;line-height:1.7}
-  .sfl-hero-photo{max-width:540px}
+  .sfl-hero-visual{min-height:380px}
+  .sfl-hero-photo{min-height:340px;max-height:480px}
 }
 @media (min-width:1101px) and (max-height:860px){
   .sfl-hero{padding:20px 0 28px}
